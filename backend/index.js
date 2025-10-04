@@ -9,7 +9,6 @@ import { computeCoverage } from './helpers/computeCoverage.js';
 import { checkRules } from './helpers/checkRules.js';
 import { computeScores } from './helpers/computeScores.js';
 import { readFile } from 'fs/promises';
-import path from 'path';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,10 +19,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.static('../frontend/dist'));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
-});
 
 const client = new MongoClient(MONGO_URI);
 
