@@ -9,6 +9,7 @@ import { computeCoverage } from './helpers/computeCoverage.js';
 import { checkRules } from './helpers/checkRules.js';
 import { computeScores } from './helpers/computeScores.js';
 import { readFile } from 'fs/promises';
+import path from 'path';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,6 +19,11 @@ const DB_NAME = process.env.DB_NAME;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(express.static('../frontend/dist'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+});
 
 const client = new MongoClient(MONGO_URI);
 
@@ -265,8 +271,6 @@ app.get('/health', async (req, res) => {
     res.status(500).json({ status: 'error', error: err.message });
   }
 });
-
-app.use(express.static('../frontend/dist'));
 
 app.listen(PORT, () => {
   console.log(`--- E Invoice Analyzer By Prethish ---`);
