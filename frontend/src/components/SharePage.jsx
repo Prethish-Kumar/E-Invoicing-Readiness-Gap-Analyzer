@@ -31,7 +31,7 @@ export default function SharePage() {
     setError(null);
 
     axios
-      .get(`http://localhost:5000/report/${id}`)
+      .get(`/report/${id}`)
       .then((res) => {
         setReport(res.data.analysis || res.data);
         setLoading(false);

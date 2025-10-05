@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableCell';
+import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
@@ -13,7 +13,7 @@ export default function Welcome() {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/reports?limit=10')
+    fetch('/reports?limit=10')
       .then((res) => res.json())
       .then((data) => setReports(data))
       .catch((err) => console.error(err));

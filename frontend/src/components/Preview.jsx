@@ -29,11 +29,16 @@ export default function Preview({ columns, rows }) {
               <TableCell component="th" scope="row">
                 {rowIndex + 1}
               </TableCell>
-              {columns.map((col) => (
-                <TableCell key={col.key} align={col.align || 'left'}>
-                  {row[col.key]}
-                </TableCell>
-              ))}
+              {columns.map((col) => {
+                const cellValue = row[col.key];
+                return (
+                  <TableCell key={col.key} align={col.align || 'left'}>
+                    {cellValue !== null && typeof cellValue === 'object'
+                      ? JSON.stringify(cellValue)
+                      : cellValue}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           ))}
         </TableBody>

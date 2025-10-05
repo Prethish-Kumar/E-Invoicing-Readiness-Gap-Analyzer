@@ -33,8 +33,12 @@ export default function CoverageDetails({ coverage, defaultOpen = false }) {
 
   if (Array.isArray(coverage.missing)) {
     coverage.missing.forEach((item) => {
+      const key =
+        typeof item === 'object'
+          ? item.target || item.description || JSON.stringify(item)
+          : item;
       unifiedDetails.push({
-        schemaKey: item.target || item,
+        schemaKey: key,
         status: 'missing',
       });
     });

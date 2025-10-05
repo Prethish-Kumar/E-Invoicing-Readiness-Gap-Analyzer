@@ -76,7 +76,7 @@ export default function Upload({ setData, setUploadId }) {
     // Send JSON to /upload
     setUploading(true);
     axios
-      .post('http://localhost:5000/upload', { data: jsonData })
+      .post('/upload', { data: jsonData })
       .then((res) => {
         setUploadId(res.data.uploadId);
         showSnackbar('File uploaded successfully!', 'success');

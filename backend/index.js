@@ -3,12 +3,17 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import multer from 'multer';
 import fs from 'fs/promises';
+import path from 'path';
 import 'dotenv/config';
 import { MongoClient, ObjectId } from 'mongodb';
 import { computeCoverage } from './helpers/computeCoverage.js';
 import { checkRules } from './helpers/checkRules.js';
 import { computeScores } from './helpers/computeScores.js';
 import { readFile } from 'fs/promises';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -33,8 +38,8 @@ connectDB();
 
 async function loadSchema() {
   const schemaPath = process.env.SCHEMA_FILE || './gets_v0_1_schema.json';
-  const fileData = await readFile(schemaPath, 'utf-8'); // read as string
-  const schema = JSON.parse(fileData); // parse JSON
+  const fileData = await readFile(schemaPath, 'utf-8');
+  const schema = JSON.parse(fileData);
   return schema;
 }
 
@@ -51,6 +56,7 @@ async function doAnalysis(data, reportId) {
   // Compute coverage
   const coverage = computeCoverage(schema.fields, report.data);
 
+  console.log(report.data);
   // Compute rules
   const rulesResultsRaw = checkRules(report.data, coverage);
 
@@ -142,19 +148,24 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     let data;
 
-    if (req.body || req.body.data) {
-      data = req.body || req.body.data;
-      if (typeof data === 'string') {
-        data = JSON.parse(data);
+    // Case 1: JSON body sent via Postman (raw)
+    if (req.body) {
+      if (Array.isArray(req.body)) {
+        data = req.body; // raw array
+      } else if (req.body.data) {
+        data = req.body.data; // wrapped array
+      } else {
+        return res.status(400).json({ error: 'Invalid JSON body format' });
       }
     }
-    // Handle uploaded JSON file
+    // Case 2: File upload
     else if (req.file) {
       if (req.file.mimetype !== 'application/json') {
         return res.status(400).json({ error: 'Only .json files are allowed' });
       }
       const fileContent = await fs.readFile(req.file.path, 'utf-8');
       data = JSON.parse(fileContent);
+      if (data.data) data = data.data;
       await fs.unlink(req.file.path);
     } else {
       return res.status(400).json({ error: 'No data provided' });
@@ -265,6 +276,10 @@ app.get('/health', async (req, res) => {
     console.error('Health check error:', err);
     res.status(500).json({ status: 'error', error: err.message });
   }
+});
+
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
 });
 
 app.listen(PORT, () => {

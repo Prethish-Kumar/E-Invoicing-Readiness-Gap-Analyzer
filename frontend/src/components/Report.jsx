@@ -28,7 +28,7 @@ export default function Report({ uploadId }) {
     setError(null);
 
     axios
-      .post('http://localhost:5000/analyze', {
+      .post('/analyze', {
         uploadId,
         questionnaire: { webhooks: true, sandbox_env: true, retries: false },
       })
@@ -43,7 +43,7 @@ export default function Report({ uploadId }) {
   const pollReport = (id) => {
     const interval = setInterval(() => {
       axios
-        .get(`http://localhost:5000/report/${id}`)
+        .get(`/report/${id}`)
         .then((res) => {
           if (res.data.status === 'done') {
             setReport(res.data.analysis);
