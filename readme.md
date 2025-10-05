@@ -5,7 +5,7 @@ This repository contains a full-stack application developed for the Complyance F
 ☁️ The live server is hosted on a small 512MB Digital Ocean droplet. The app can scale easily in the cloud without limitations.
 
 **Live URL:** [http://einvoicechecker.online/](http://einvoicechecker.online/)  
-**Postman Collection:** [Click here](https://.postman.co/workspace/My-Workspace~51915c36-4ea5-4c85-82fc-acd226440e92/request/27634321-7530db8e-f571-4e04-a94b-11698b6cafd9?action=share&creator=27634321&ctx=documentation)
+**Postman Collection:** [Click here](https://postman.co/workspace/My-Workspace~51915c36-4ea5-4c85-82fc-acd226440e92/request/27634321-7530db8e-f571-4e04-a94b-11698b6cafd9?action=share&creator=27634321&ctx=documentation)
 
 ---
 
@@ -124,5 +124,5 @@ This project is licensed under the MIT License.
 ## 🔗 Useful Links
 
 - **Live App:** [http://einvoicechecker.online/](http://einvoicechecker.online/)
-- **Postman Collection:** [Click here](https://.postman.co/workspace/My-Workspace~51915c36-4ea5-4c85-82fc-acd226440e92/request/27634321-7530db8e-f571-4e04-a94b-11698b6cafd9?action=share&creator=27634321&ctx=documentation)
+- **Postman Collection:** [Click here](https://postman.co/workspace/My-Workspace~51915c36-4ea5-4c85-82fc-acd226440e92/request/27634321-7530db8e-f571-4e04-a94b-11698b6cafd9?action=share&creator=27634321&ctx=documentation)
 - **Complyance:** [Company Website](https://complyance.io)
