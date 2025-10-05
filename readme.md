@@ -2,6 +2,8 @@
 
 This repository contains a full-stack application developed for the Complyance Full Stack Developer Intern assignment. The application assesses an organization's readiness for e-invoicing compliance, identifying gaps and providing actionable insights.
 
+☁️ The live server is hosted on a small 512MB Digital Ocean droplet. The app can scale easily in the cloud without limitations.
+
 **Live URL:** [http://einvoicechecker.online/](http://einvoicechecker.online/)  
 **Postman Collection:** [Click here](https://.postman.co/workspace/My-Workspace~51915c36-4ea5-4c85-82fc-acd226440e92/request/27634321-7530db8e-f571-4e04-a94b-11698b6cafd9?action=share&creator=27634321&ctx=documentation)
 
@@ -16,8 +18,6 @@ This repository contains a full-stack application developed for the Complyance F
 | GET    | /report/{id} | Get a single report                         |
 | GET    | /reports     | Get all reports                             |
 | GET    | /health      | Check server and database health            |
-
-☁️ The live server is hosted on a small 512MB Digital Ocean droplet. The app can scale easily in the cloud without limitations.
 
 ---
 
