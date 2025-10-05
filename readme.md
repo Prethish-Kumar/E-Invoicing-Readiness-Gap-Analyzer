@@ -115,14 +115,6 @@ node index.js
 
 ---
 
-## 💡 Best Practices
-
-- Prefix API routes with `/api` to avoid conflicts with frontend routing.
-- Serve frontend build **after** registering API routes to prevent catch-all routes from hijacking API requests.
-- Use a small VPS cautiously; MongoDB may consume memory. Consider remote MongoDB if needed.
-
----
-
 ## 📄 License
 
 This project is licensed under the MIT License.
